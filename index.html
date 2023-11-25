@@ -2,25 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./files/index.css"/>
+    <link rel="stylesheet" href="./files/normalize.css"/>
     <script src="./files/vue.min.js"></script>
-    <script src="./files/vant.min.js"></script>
     <style type="text/css">
         body {
             background: #ededed;
-        }
-
-        .cell {
-            color: #000000;
-            height: 60px;
-            line-height: 60px;
-            background: #fff;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border-left: 1px solid #e6e6e6;
-            text-align: center;
-            border-bottom: 1px solid #e6e6e6;
         }
 
         .item {
@@ -36,7 +22,30 @@
             border-radius: 6px;
         }
 
+        .cell-wrap {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .cell-wrap > div {
+            width: 25%;
+        }
+
+        .cell {
+            color: #000000;
+            height: 60px;
+            line-height: 60px;
+            background: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-left: 1px solid #e6e6e6;
+            text-align: center;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
         .top {
+            color: #ffffff;
             height: 60px;
             background: #2783e0;
             padding-left: 10px;
@@ -52,34 +61,48 @@
             height: 60px;
             line-height: 60px;
         }
+
+        .result {
+            height: 60px;
+            line-height: 60px;
+            font-size: 30px;
+            text-align: center;
+            margin: 10px 0;
+            color: #ff0000;
+        }
     </style>
     <title>超级导航</title>
 </head>
 <body>
 <div id="app">
     <div class="top">
-        <span class="top-title">欢迎光临，祝您生活愉快！</span>
-        <span class="top-text">真鸡巴酷炫啊，哥们！</span>
+        <span class="top-title">{{ title }}</span>
+        <span class="top-text">{{ titleText }}</span>
     </div>
+    <div class="result">{{ result }}</div>
     <div v-for="item of items">
         <div class="item">{{ item.name }}</div>
-        <van-row>
-            <van-col v-for="{ name, address } of item.sites" span="6">
-                <a :href="address">
+        <div class="cell-wrap">
+            <div v-for="{ name, address } of item.sites">
+                <a style="text-decoration: none;" :href="address">
                     <div class="cell">{{ name }}</div>
                 </a>
-            </van-col>
-        </van-row>
+            </div>
+        </div>
     </div>
 </div>
 </body>
 <script src="./files/map.js" type="application/javascript"></script>
+<script src="./files/config.js" type="application/javascript"></script>
 <script>
     // 在 #app 标签下渲染一个按钮组件
     new Vue({
         el: '#app',
         data() {
             return {
+                title: TITLE,
+                titleText: TITLE_TEXT,
+                result: RESULT,
                 items: WEB_SITE_MAP
             }
         }
