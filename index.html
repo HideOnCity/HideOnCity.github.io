@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./files/index.css"/>
+    <script src="./files/vue.min.js"></script>
+    <script src="./files/vant.min.js"></script>
+    <style type="text/css">
+        body {
+            background: #ededed;
+        }
+
+        .cell {
+            color: #000000;
+            height: 60px;
+            line-height: 60px;
+            background: #fff;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-left: 1px solid #e6e6e6;
+            text-align: center;
+            border-bottom: 1px solid #e6e6e6;
+        }
+
+        .item {
+            width: 200px;
+            height: 60px;
+            line-height: 60px;
+            background: #2783e0;
+            color: #ffffff;
+            font-size: 20px;
+            letter-spacing: 1px;
+            text-align: center;
+            margin: 15px 5px 5px;
+            border-radius: 6px;
+        }
+
+        .top {
+            height: 60px;
+            background: #2783e0;
+            padding-left: 10px;
+        }
+
+        .top-title {
+            height: 60px;
+            line-height: 60px;
+            font-size: 24px;
+        }
+
+        .top-text {
+            height: 60px;
+            line-height: 60px;
+        }
+    </style>
+    <title>超级导航</title>
+</head>
+<body>
+<div id="app">
+    <div class="top">
+        <span class="top-title">欢迎光临，祝您生活愉快！</span>
+        <span class="top-text">真鸡巴酷炫啊，哥们！</span>
+    </div>
+    <div v-for="item of items">
+        <div class="item">{{ item.name }}</div>
+        <van-row>
+            <van-col v-for="{ name, address } of item.sites" span="6">
+                <a :href="address">
+                    <div class="cell">{{ name }}</div>
+                </a>
+            </van-col>
+        </van-row>
+    </div>
+</div>
+</body>
+<script src="./files/map.js" type="application/javascript"></script>
+<script>
+    // 在 #app 标签下渲染一个按钮组件
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                items: WEB_SITE_MAP
+            }
+        }
+    });
+</script>
+</html>
